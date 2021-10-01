@@ -91,7 +91,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             hintText: "Password",
                             labelText: "Password",
                             prefixIcon: Icons.lock_outline,
-                            suffixIcon: Icons.remove_red_eye,
+                            suffixIcon: RegisterCubit.get(context).iconData,
+                            suffixIconFunction:  (){
+                              RegisterCubit.get(context).changePasswordVisibilityIcon();
+                            },
                             validation: (String? value) {
                               if (value!.isEmpty) {
                                 return "Enter Your Email";

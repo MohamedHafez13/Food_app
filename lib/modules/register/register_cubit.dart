@@ -8,7 +8,8 @@ class RegisterCubit extends Cubit<RegisterStates> {
   RegisterCubit() : super(RegisterInitialState());
 
   static RegisterCubit get(context) => BlocProvider.of(context);
-
+  IconData iconData = Icons.visibility_off_outlined;
+  bool obscureText = true ;
   void createUser({
     required String name,
     required String email,
@@ -30,5 +31,12 @@ class RegisterCubit extends Cubit<RegisterStates> {
   void setUId()async{
     SharedPreferences preferences =await SharedPreferences.getInstance();
     preferences.setString('uid',"${FirebaseAuth.instance.currentUser!.uid}" );
+  }
+
+  void changePasswordVisibilityIcon()
+  {
+    obscureText = !obscureText;
+    iconData = obscureText? Icons.visibility_off_outlined:Icons.remove_red_eye;
+    emit(ChangePasswordRegisterVisibility());
   }
 }
